@@ -1,6 +1,1 @@
 accessWidener	v2	named
-
-accessible	field	net/minecraft/world/level/block/entity/BeaconBlockEntity	beamSections	Ljava/util/List;
-mutable	field	net/minecraft/world/level/block/entity/BeaconBlockEntity	beamSections	Ljava/util/List;
-accessible	field	net/minecraft/world/level/block/entity/BeaconBlockEntity$BeaconBeamSection	height	I
-mutable	field	net/minecraft/world/level/block/entity/BeaconBlockEntity$BeaconBeamSection	height	I
