@@ -5,7 +5,8 @@ public enum ModCompat {
     MEGA_SHOWDOWN("mega_showdown"),
     RCT_API("rctapi"),
     SIZE_VARIATIONS("cobblemonsizevariation"),
-    IRIS("iris");
+    IRIS("iris"),
+    FORCE_BEACON_LOAD("force-beacon-load");
 
     private final String modid;
     private boolean loaded;

@@ -66,6 +66,8 @@ dependencies {
     modCompileOnly "dev.emi:emi-fabric:1.1.22+1.21.1:api"
     // modRuntimeOnly "dev.emi:emi-fabric:1.1.22+1.21.1"
 
+    modCompileOnly files("${rootProject.projectDir}/libs/force-beacon-load-1.0.2+mc1.21.1.jar")
+
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 }

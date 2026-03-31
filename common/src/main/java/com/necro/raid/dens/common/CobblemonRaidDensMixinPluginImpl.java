@@ -18,7 +18,10 @@ public abstract class CobblemonRaidDensMixinPluginImpl implements IMixinConfigPl
         mixin("msd.CobbleEventsMixin"), () -> this.isModLoaded(ModCompat.MEGA_SHOWDOWN.getModid()),
         mixin("showdown.ShowdownInterpreterMixin"), this::isCobblemon171,
         mixin("den.LevelChunkMixin"), () -> !this.isModLoaded("worldedit", "carpet"),
-        mixin("den.LevelMixin"), () -> !this.isModLoaded("carpet")
+        mixin("den.LevelMixin"), () -> !this.isModLoaded("carpet"),
+        mixin("forcebeacon.WorldBeaconDataMixin"), () -> this.isModLoaded(ModCompat.FORCE_BEACON_LOAD.getModid()),
+        mixin("forcebeacon.RaidCrystalBlockEntityMixin"), () -> this.isModLoaded(ModCompat.FORCE_BEACON_LOAD.getModid()),
+        mixin("forcebeacon.RaidCrystalBlockMixin"), () -> this.isModLoaded(ModCompat.FORCE_BEACON_LOAD.getModid())
     );
 
     @Override

@@ -7,6 +7,9 @@
         "ai.RCTBattleAIMixin",
         "den.LevelChunkMixin",
         "den.LevelMixin",
+        "forcebeacon.RaidCrystalBlockEntityMixin",
+        "forcebeacon.RaidCrystalBlockMixin",
+        "forcebeacon.WorldBeaconDataMixin",
         "msd.CobbleEventsMixin",
         "showdown.GraalShowdownUnbundlerMixin",
         "showdown.ShowdownInterpreterMixin"
