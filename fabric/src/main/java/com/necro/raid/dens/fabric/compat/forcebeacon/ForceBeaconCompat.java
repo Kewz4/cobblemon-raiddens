@@ -21,16 +21,23 @@ import java.util.Map;
  */
 public class ForceBeaconCompat {
     private static final Map<BlockPos, BeaconBlockEntity> PHANTOM_BEACONS = new HashMap<>();
+    private static boolean adding = false;
 
     public static void registerCrystal(ServerLevel level, BlockPos pos, RaidTier tier) {
+        if (adding) return;
         BeaconBlockEntity phantom = PHANTOM_BEACONS.get(pos);
         if (phantom == null) {
             phantom = createPhantom(level, pos, tier);
             PHANTOM_BEACONS.put(pos, phantom);
         }
 
-        WorldBeaconData data = ForceBeaconLoad.INSTANCE.getBeaconData(level);
-        data.add(phantom, level);
+        adding = true;
+        try {
+            WorldBeaconData data = ForceBeaconLoad.INSTANCE.getBeaconData(level);
+            data.add(phantom, level);
+        } finally {
+            adding = false;
+        }
     }
 
     public static void unregisterCrystal(ServerLevel level, BlockPos pos) {
@@ -44,13 +51,18 @@ public class ForceBeaconCompat {
      * Called after WorldBeaconData.check() removes our entries.
      */
     public static void reRegisterPhantoms(ServerLevel level) {
-        if (PHANTOM_BEACONS.isEmpty()) return;
-        WorldBeaconData data = ForceBeaconLoad.INSTANCE.getBeaconData(level);
-        for (Map.Entry<BlockPos, BeaconBlockEntity> entry : PHANTOM_BEACONS.entrySet()) {
-            BlockPos pos = entry.getKey();
-            if (level.isLoaded(pos) && level.getBlockEntity(pos) instanceof RaidCrystalBlockEntity) {
-                data.add(entry.getValue(), level);
+        if (adding || PHANTOM_BEACONS.isEmpty()) return;
+        adding = true;
+        try {
+            WorldBeaconData data = ForceBeaconLoad.INSTANCE.getBeaconData(level);
+            for (Map.Entry<BlockPos, BeaconBlockEntity> entry : PHANTOM_BEACONS.entrySet()) {
+                BlockPos pos = entry.getKey();
+                if (level.isLoaded(pos) && level.getBlockEntity(pos) instanceof RaidCrystalBlockEntity) {
+                    data.add(entry.getValue(), level);
+                }
             }
+        } finally {
+            adding = false;
         }
     }
 
